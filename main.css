@@ -54,7 +54,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   text-align: center;
 }
 
@@ -91,4 +91,11 @@ main {
   font-size: 24px;
   font-weight: 500;
   text-shadow: 0 4px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 900px) {
+  .app-wrap {
+    grid-template-columns: 100%;
+    /* margin-bottom: 50px; */
+  }
 }
