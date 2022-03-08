@@ -16,9 +16,10 @@ function setQuery(e) {
 function getResult(query) {
   fetch(`${api.baseUrl}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then((weather) => {
+      // console.log(weather.json());
       return weather.json();
     })
-    .then(displayResults);  
+    .then(displayResults);
 }
 
 function displayResults(havo) {
@@ -27,6 +28,10 @@ function displayResults(havo) {
     dayStatus = document.querySelector(".wheather"),
     maxMin = document.querySelector(".high-low");
 
+  let now = new Date();
+  let date = document.querySelector(".location, .date");
+  date.innerHTML = dateBuilder(now);
+
   city.innerHTML = `${havo.name} , ${havo.sys.country}`;
   temperature.innerHTML = `${Math.round(havo.main.temp)}<span>°C</span>`;
   dayStatus.innerHTML = havo.weather[0].description;
@@ -34,4 +39,38 @@ function displayResults(havo) {
     havo.main.temp_max
   )}°C`;
   searchBox.value = "";
+}
+
+function dateBuilder(s) {
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  let day = days[s.getDay() - 1];
+  let date = s.getDate();
+  let month = months[s.getMonth()];
+  let year = s.getFullYear();
+
+  return `${day} ${date} ${month} ${year}`;
 }
